@@ -93,8 +93,28 @@
                 background: linear-gradient(90deg, #f9a8d4, #e879f9);
                 border-radius: 2px;
             }
+            .img-skeleton {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: loading 1.5s infinite;
+            }
+            @keyframes loading {
+                0% {
+                    background-position: 200% 0;
+                }
+                100% {
+                    background-position: -200% 0;
+                }
+            }
+            .img-fade-in {
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .img-fade-in.loaded {
+                opacity: 1;
+            }
         }
-        
+
         @keyframes float {
             0% {
                 transform: translateY(0px);
@@ -106,7 +126,7 @@
                 transform: translateY(0px);
             }
         }
-        
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -115,7 +135,7 @@
                 opacity: 1;
             }
         }
-        
+
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -126,7 +146,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes scaleIn {
             from {
                 opacity: 0;
@@ -137,7 +157,7 @@
                 transform: scale(1);
             }
         }
-        
+
         @keyframes modalIn {
             from {
                 opacity: 0;
@@ -148,7 +168,7 @@
                 transform: scale(1);
             }
         }
-        
+
         @keyframes modalOut {
             from {
                 opacity: 1;
@@ -159,7 +179,7 @@
                 transform: scale(0.8);
             }
         }
-        
+
         @keyframes blurIn {
             from {
                 backdrop-filter: blur(0px);
@@ -170,19 +190,19 @@
                 opacity: 1;
             }
         }
-        
+
         /* 滚动显示动画 */
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
+
         .scroll-reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* 延迟动画 */
         .delay-100 {
             animation-delay: 0.1s;
@@ -217,341 +237,378 @@
     </style>
 </head>
 <body class="bg-background min-h-screen font-sans text-text">
-    <!-- 顶部英雄区域 -->
-    <header class="relative py-20 px-4 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 -z-10 animate-pulse-slow"></div>
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNmMtMy4zMTQgMC02IDIuNjg2LTYgNnMyLjY4NiA2IDYgNnptMCAzMGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNmMtMy4zMTQgMC02IDIuNjg2LTYgNnMyLjY4NiA2IDYgNnptLTE4LTMwYzMuMzE0IDAgNi0yLjY4NiA2LTZzLTIuNjg2LTYtNi02Yy0zLjMxNCAwLTYgMi42ODYtNiA2czIuNjg2IDYgNiA2em0wIDMwYzMuMzE0IDAgNi0yLjY4NiA2LTZzLTIuNjg2LTYtNi02Yy0zLjMxNCAwLTYgMi42ODYtNiA2czIuNjg2IDYgNiA2em0xOC0xOGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNmMtMy4zMTQgMC02IDIuNjg2LTYgNnMyLjY4NiA2IDYgNnoiIHN0cm9rZT0iI2Y5YThkNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+')] opacity-30 -z-20 animate-float"></div>
-        <div class="container mx-auto max-w-4xl text-center">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4 gradient-text text-glow animate-slide-up">2025金浩森跨年班纪念</h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-500 letter-spacing-wide animate-slide-up delay-200">✨ 记录我们共同度过的美好时光 ✨</p>
-            <div class="inline-block animate-slide-up delay-400">
-                <button id="scrollBtn" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-full soft-shadow hover-lift font-medium transition-all duration-300 hover:px-10 hover:py-4 flex items-center gap-2 group">
-                    <span>浏览回忆</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- 简介区域 -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto max-w-4xl">
-            <div class="bg-white rounded-2xl p-8 card-shadow scroll-reveal">
-                <h2 class="text-3xl font-bold mb-6 text-center decoration-line">关于我们的班级</h2>
-                <p class="text-lg text-gray-600 leading-relaxed text-center">
-                    2025年的跨年夜，我们一起<span class="text-primary font-semibold">龙游菩提谷</span>度过了难忘的时光。
-                    这个网页记录了我们班级的点点滴滴，每一张照片都承载着我们的回忆和友谊。
-                    让我们一起回顾这段美好的旅程，珍惜彼此之间的情谊，期待未来更多的精彩时刻。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 作品集图库 -->
-    <section id="gallery" class="py-16 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl font-bold mb-12 text-center text-primary scroll-reveal decoration-line">班级作品集</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 图片1 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/1.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">美好时光</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片2 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.1s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/2.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">珍贵瞬间</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片3 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.2s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/3.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">友谊长存</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片4 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.3s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/4.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">快乐时光</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片5 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.4s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/5.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">共同成长</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片6 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.5s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/6.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">美好回忆</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片7 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.6s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/7.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">青春岁月</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片8 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.7s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/8.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">同窗之谊</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片9 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.8s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/9.jpg" alt="班级回忆" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-4 font-medium">珍贵记忆</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 图片10 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal col-span-1 sm:col-span-2 lg:col-span-3" style="transition-delay: 0.9s;">
-                    <div class="relative overflow-hidden group gallery-item">
-                        <img src="images/10.jpg" alt="班级回忆" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
-                            <p class="text-white p-6 font-medium text-xl">我们的故事，未完待续...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 学员和老师&工作人员&模特展示区域 -->
-    <section class="py-16 px-4 bg-white">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl font-bold mb-12 text-center text-primary scroll-reveal decoration-line">参与人员</h2>
-            
-            <!-- 学员 -->
-            <div class="mb-12 scroll-reveal">
-                <h3 class="text-2xl font-semibold mb-8 text-center text-gray-700"><span class="text-primary">✦</span> 学员 <span class="text-primary">✦</span></h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">陈快乐</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">岑晗</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">刘燊</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">曾粤</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">方琳</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">小好</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">莉莉安</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">费明洋</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">鱼仔</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">王诗语</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">黄嘉仪</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">夏星雨</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">果汁</span>
-                    <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">文娟</span>
-                </div>
-            </div>
-            
-            <!-- 老师和工作人员 -->
-            <div class="mb-12 scroll-reveal" style="transition-delay: 0.2s;">
-                <h3 class="text-2xl font-semibold mb-8 text-center text-gray-700"><span class="text-secondary">✦</span> 老师和工作人员 <span class="text-secondary">✦</span></h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">金浩森</span>
-                    <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">项伟</span>
-                    <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">徐俊</span>
-                    <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">明月</span>
-                    <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">佩佩</span>
-                </div>
-            </div>
-            
-            <!-- 模特 -->
-            <div class="scroll-reveal" style="transition-delay: 0.4s;">
-                <h3 class="text-2xl font-semibold mb-8 text-center text-gray-700"><span class="text-accent">✦</span> 模特 <span class="text-accent">✦</span></h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <span class="px-4 py-2 bg-accent/10 text-gray-700 rounded-full text-sm font-medium hover:bg-accent/20 transition-colors">弹壳</span>
-                    <span class="px-4 py-2 bg-accent/10 text-gray-700 rounded-full text-sm font-medium hover:bg-accent/20 transition-colors">骐骐</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 引用区域 -->
-    <section class="py-16 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
-        <div class="container mx-auto max-w-4xl text-center">
-            <div class="text-4xl mb-4">💕</div>
-            <blockquote class="text-2xl italic font-light mb-4 text-gray-700 scroll-reveal">
-                "友谊是灵魂的结合，是两个身体中的同一个灵魂。"
-            </blockquote>
-            <p class="text-gray-500 text-sm tracking-widest scroll-reveal" style="transition-delay: 0.3s;">— 亚里士多德 —</p>
-        </div>
-    </section>
-
-    <!-- 底部区域 -->
-    <footer class="py-12 px-4 bg-white">
-        <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row justify-between items-center scroll-reveal">
-                <div class="mb-6 md:mb-0">
-                    <h3 class="text-xl font-bold text-primary">2025金浩森跨年班</h3>
-                    <p class="text-gray-600 mt-2">珍藏我们的美好回忆</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500 scroll-reveal" style="transition-delay: 0.3s;">
-                <p>&copy; 2025 金浩森跨年班纪念. 保留所有权利.</p>
-            </div>
-            <div class="mt-6 text-center">
-                <p class="text-gray-400 text-sm tracking-wider">
-                    <span class="inline-block mx-2">✦</span>
-                    Made with <span class="text-primary">❤</span> by 小好
-                    <span class="inline-block mx-2">✦</span>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 图片查看器模态框 -->
-    <div id="imageModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden">
-        <div class="relative max-w-[90vw] max-h-[90vh]">
-            <img id="modalImage" src="" alt="放大查看" class="max-w-full max-h-[90vh] object-contain rounded-lg">
-            <button id="closeModal" class="absolute top-4 right-4 bg-white/20 text-white rounded-full p-2 hover:bg-white/40 transition-colors">
-                <i class="fa fa-times text-xl"></i>
+<!-- 顶部英雄区域 -->
+<header class="relative py-20 px-4 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 -z-10 animate-pulse-slow"></div>
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNmMtMy4zMTQgMC02IDIuNjg2LTYgNnMyLjY4NiA2IDYgNnptMCAzMGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNmMtMy4zMTQgMC02IDIuNjg2LTYgNnMyLjY4NiA2IDYgNnptLTE4LTMwYzMuMzE0IDAgNi0yLjY4NiA2LTZzLTIuNjg2LTYtNi02Yy0zLjMxNCAwLTYgMi42ODYtNiA2czIuNjg2IDYgNiA2em0wIDMwYzMuMzE0IDAgNi0yLjY4NiA2LTZzLTIuNjg2LTYtNi02Yy0zLjMxNCAwLTYgMi42ODYtNiA2czIuNjg2IDYgNiA2em0xOC0xOGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNmMtMy4zMTQgMC02IDIuNjg2LTYgNnMyLjY4NiA2IDYgNnoiIHN0cm9rZT0iI2Y5YThkNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+')] opacity-30 -z-20 animate-float"></div>
+    <div class="container mx-auto max-w-4xl text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 gradient-text text-glow animate-slide-up">2025金浩森跨年班纪念</h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-500 letter-spacing-wide animate-slide-up delay-200">✨ 记录我们共同度过的美好时光 ✨</p>
+        <div class="inline-block animate-slide-up delay-400">
+            <button id="scrollBtn" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-full soft-shadow hover-lift font-medium transition-all duration-300 hover:px-10 hover:py-4 flex items-center gap-2 group">
+                <span>浏览回忆</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
             </button>
-            <div class="absolute bottom-4 left-0 right-0 text-center">
-                <p class="text-white bg-black/50 inline-block px-4 py-2 rounded-full">点击图片或按ESC关闭</p>
+        </div>
+    </div>
+</header>
+
+<!-- 简介区域 -->
+<section class="py-16 px-4">
+    <div class="container mx-auto max-w-4xl">
+        <div class="bg-white rounded-2xl p-8 card-shadow scroll-reveal">
+            <h2 class="text-3xl font-bold mb-6 text-center decoration-line">关于我们的班级</h2>
+            <p class="text-lg text-gray-600 leading-relaxed text-center">
+                2025年的跨年夜，我们一起<span class="text-primary font-semibold">龙游菩提谷</span>度过了难忘的时光。
+                这个网页记录了我们班级的点点滴滴，每一张照片都承载着我们的回忆和友谊。
+                让我们一起回顾这段美好的旅程，珍惜彼此之间的情谊，期待未来更多的精彩时刻。
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- 作品集图库 -->
+<section id="gallery" class="py-16 px-4">
+    <div class="container mx-auto max-w-6xl">
+        <h2 class="text-3xl font-bold mb-12 text-center text-primary scroll-reveal decoration-line">班级作品集</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 图片1 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/1.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">美好时光</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片2 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/2.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">珍贵瞬间</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片3 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.2s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/3.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">友谊长存</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片4 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.3s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/4.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">快乐时光</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片5 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.4s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/5.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">共同成长</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片6 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.5s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/6.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">美好回忆</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片7 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.6s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/7.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">青春岁月</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片8 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.7s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/8.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">同窗之谊</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片9 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal" style="transition-delay: 0.8s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/9.jpg" alt="班级回忆" class="lazy-img w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-4 font-medium">珍贵记忆</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片10 -->
+            <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift scroll-reveal col-span-1 sm:col-span-2 lg:col-span-3" style="transition-delay: 0.9s;">
+                <div class="relative overflow-hidden group gallery-item img-skeleton">
+                    <img data-src="images/10.jpg" alt="班级回忆" class="lazy-img w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105 img-fade-in" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pointer-events-none">
+                        <p class="text-white p-6 font-medium text-xl">我们的故事，未完待续...</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <script>
-        // 页面加载完成后执行
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('页面加载完成');
-            
-            // 滚动显示动画功能
-            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
-            console.log('找到的滚动元素数量:', scrollRevealElements.length);
-            
-            function checkScroll() {
-                scrollRevealElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementTop < windowHeight * 0.85) {
-                        element.classList.add('active');
-                    }
-                });
-            }
-            
-            // 初始检查
-            checkScroll();
-            
-            // 滚动时检查
-            window.addEventListener('scroll', checkScroll);
-            
-            // 图片查看器功能
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const closeModal = document.getElementById('closeModal');
-            
-            // 选择所有图片
-            const images = document.querySelectorAll('.gallery-item img');
-            console.log('找到的图片数量:', images.length);
+<!-- 学员和老师&工作人员&模特展示区域 -->
+<section class="py-16 px-4 bg-white">
+    <div class="container mx-auto max-w-6xl">
+        <h2 class="text-3xl font-bold mb-12 text-center text-primary scroll-reveal decoration-line">参与人员</h2>
 
-            // 打开模态框
-            images.forEach((img) => {
-                img.style.cursor = 'pointer';
-                img.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    
-                    // 获取图片路径
-                    const imgSrc = this.src;
-                    
+        <!-- 学员 -->
+        <div class="mb-12 scroll-reveal">
+            <h3 class="text-2xl font-semibold mb-8 text-center text-gray-700"><span class="text-primary">✦</span> 学员 <span class="text-primary">✦</span></h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">陈快乐</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">岑晗</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">刘燊</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">曾粤</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">方琳</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">小好</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">莉莉安</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">费明洋</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">鱼仔</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">王诗语</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">黄嘉仪</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">夏星雨</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">果汁</span>
+                <span class="px-4 py-2 bg-primary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors">文娟</span>
+            </div>
+        </div>
+
+        <!-- 老师和工作人员 -->
+        <div class="mb-12 scroll-reveal" style="transition-delay: 0.2s;">
+            <h3 class="text-2xl font-semibold mb-8 text-center text-gray-700"><span class="text-secondary">✦</span> 老师和工作人员 <span class="text-secondary">✦</span></h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">金浩森</span>
+                <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">项伟</span>
+                <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">徐俊</span>
+                <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">明月</span>
+                <span class="px-4 py-2 bg-secondary/10 text-gray-700 rounded-full text-sm font-medium hover:bg-secondary/20 transition-colors">佩佩</span>
+            </div>
+        </div>
+
+        <!-- 模特 -->
+        <div class="scroll-reveal" style="transition-delay: 0.4s;">
+            <h3 class="text-2xl font-semibold mb-8 text-center text-gray-700"><span class="text-accent">✦</span> 模特 <span class="text-accent">✦</span></h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-4 py-2 bg-accent/10 text-gray-700 rounded-full text-sm font-medium hover:bg-accent/20 transition-colors">弹壳</span>
+                <span class="px-4 py-2 bg-accent/10 text-gray-700 rounded-full text-sm font-medium hover:bg-accent/20 transition-colors">骐骐</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 引用区域 -->
+<section class="py-16 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
+    <div class="container mx-auto max-w-4xl text-center">
+        <div class="text-4xl mb-4">💕</div>
+        <blockquote class="text-2xl italic font-light mb-4 text-gray-700 scroll-reveal">
+            "友谊是灵魂的结合，是两个身体中的同一个灵魂。"
+        </blockquote>
+        <p class="text-gray-500 text-sm tracking-widest scroll-reveal" style="transition-delay: 0.3s;">— 亚里士多德 —</p>
+    </div>
+</section>
+
+<!-- 底部区域 -->
+<footer class="py-12 px-4 bg-white">
+    <div class="container mx-auto max-w-6xl">
+        <div class="flex flex-col md:flex-row justify-between items-center scroll-reveal">
+            <div class="mb-6 md:mb-0">
+                <h3 class="text-xl font-bold text-primary">2025金浩森跨年班</h3>
+                <p class="text-gray-600 mt-2">珍藏我们的美好回忆</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500 scroll-reveal" style="transition-delay: 0.3s;">
+            <p>&copy; 2025 金浩森跨年班纪念. 保留所有权利.</p>
+        </div>
+        <div class="mt-6 text-center">
+            <p class="text-gray-400 text-sm tracking-wider">
+                <span class="inline-block mx-2">✦</span>
+                Made with <span class="text-primary">❤</span> by 小好
+                <span class="inline-block mx-2">✦</span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- 图片查看器模态框 -->
+<div id="imageModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden">
+    <div class="relative max-w-[90vw] max-h-[90vh]">
+        <img id="modalImage" src="" alt="放大查看" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+        <button id="closeModal" class="absolute top-4 right-4 bg-white/20 text-white rounded-full p-2 hover:bg-white/40 transition-colors">
+            <i class="fa fa-times text-xl"></i>
+        </button>
+        <div class="absolute bottom-4 left-0 right-0 text-center">
+            <p class="text-white bg-black/50 inline-block px-4 py-2 rounded-full">点击图片或按ESC关闭</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('页面加载完成');
+
+        // 滚动显示动画功能
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        console.log('找到的滚动元素数量:', scrollRevealElements.length);
+
+        function checkScroll() {
+            scrollRevealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight * 0.85) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // 初始检查
+        checkScroll();
+
+        // 滚动时检查
+        window.addEventListener('scroll', checkScroll);
+
+        // 图片查看器功能
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+
+        // 选择所有图片
+        const images = document.querySelectorAll('.gallery-item img');
+        console.log('找到的图片数量:', images.length);
+
+        // 打开模态框
+        images.forEach((img) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                // 获取图片路径 - 优先使用已加载的src，否则使用data-src
+                const imgSrc = this.src || this.getAttribute('data-src');
+                if (imgSrc) {
                     modalImage.src = imgSrc;
                     modal.classList.remove('hidden');
                     document.body.style.overflow = 'hidden';
-                });
-            });
-
-            // 关闭模态框
-            function closeModalFunc() {
-                console.log('关闭模态框');
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-
-            // 关闭按钮点击事件
-            if (closeModal) {
-                closeModal.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    closeModalFunc();
-                });
-            }
-            
-            // 点击模态框背景关闭
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModalFunc();
                 }
             });
+        });
 
-            // 按ESC键关闭
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    closeModalFunc();
-                }
+        // 关闭模态框
+        function closeModalFunc() {
+            console.log('关闭模态框');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 关闭按钮点击事件
+        if (closeModal) {
+            closeModal.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeModalFunc();
             });
-            
-            // 添加页面加载动画
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease-in-out';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-            
-            // 浏览回忆按钮点击事件 - 平滑滚动到作品集
-            const scrollBtn = document.getElementById('scrollBtn');
-            if (scrollBtn) {
-                scrollBtn.addEventListener('click', function() {
-                    const gallery = document.getElementById('gallery');
-                    if (gallery) {
-                        gallery.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'start' 
-                        });
-                    }
-                });
+        }
+
+        // 点击模态框背景关闭
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModalFunc();
             }
         });
-    </script>
+
+        // 按ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModalFunc();
+            }
+        });
+
+        // 添加页面加载动画
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+
+        // 浏览回忆按钮点击事件 - 平滑滚动到作品集
+        const scrollBtn = document.getElementById('scrollBtn');
+        if (scrollBtn) {
+            scrollBtn.addEventListener('click', function() {
+                const gallery = document.getElementById('gallery');
+                if (gallery) {
+                    gallery.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        }
+
+        // 图片懒加载
+        const lazyImages = document.querySelectorAll('.lazy-img');
+
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+
+                    if (src) {
+                        img.src = src;
+                        img.removeAttribute('data-src');
+
+                        img.onload = function() {
+                            img.classList.add('loaded');
+                            img.parentElement.classList.remove('img-skeleton');
+                        };
+
+                        img.onerror = function() {
+                            console.error('图片加载失败:', src);
+                            img.parentElement.classList.remove('img-skeleton');
+                        };
+                    }
+
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    });
+</script>
 </body>
 </html>
